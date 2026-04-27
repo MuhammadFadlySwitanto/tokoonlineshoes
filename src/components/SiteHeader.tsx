@@ -9,7 +9,7 @@ const SiteHeader = () => {
           <div className="w-9 h-9 rounded-xl bg-gradient-primary shadow-neu-sm flex items-center justify-center">
             <span className="text-primary-foreground font-extrabold text-lg">S</span>
           </div>
-          <span className="font-extrabold text-lg tracking-tight">Stride Co.</span>
+          <span className="font-extrabold text-lg tracking-tight">FadzKicks</span>
         </Link>
 
         <nav className="hidden md:flex gap-8 text-sm font-semibold text-muted-foreground">
