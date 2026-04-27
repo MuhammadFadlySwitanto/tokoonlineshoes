@@ -1,19 +1,12 @@
 import { useState } from "react";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, ShieldCheck, Truck, RefreshCw, Star } from "lucide-react";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { getProduct, formatRupiah } from "@/data/products";
+import { supabase } from "@/lib/supabaseClient";
 
 const orderSchema = z.object({
   fullName: z.string().trim().min(2, "Nama minimal 2 karakter").max(100),
@@ -34,18 +27,18 @@ const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const product = id ? getProduct(id) : undefined;
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const [size, setSize] = useState<number | null>(null);
   const [qty, setQty] = useState(1);
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState<{ orderId: string } | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   if (!product) return <Navigate to="/" replace />;
 
   const total = product.price * qty;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors({});
 
