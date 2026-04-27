@@ -278,7 +278,7 @@ const ProductDetail = () => {
             </div>
             <DialogTitle className="text-2xl">Pesanan Berhasil Dibuat!</DialogTitle>
             <DialogDescription className="text-base">
-              Terima kasih telah berbelanja di Stride Co. Tim kami akan segera menghubungi Anda
+              Terima kasih telah berbelanja di FadzKicks Tim kami akan segera menghubungi Anda
               via WhatsApp untuk konfirmasi pembayaran.
             </DialogDescription>
           </DialogHeader>

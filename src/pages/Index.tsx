@@ -39,7 +39,7 @@ const Index = () => {
               </div>
               <h1 className="font-extrabold text-5xl sm:text-6xl lg:text-7xl leading-[1.05] mb-6">
                 Langkahi Hari Anda dengan{" "}
-                <span className="bg-gradient-primary bg-clip-text text-transparent">Stride Co.</span>
+                <span className="bg-gradient-primary bg-clip-text text-transparent">FadzKicks</span>
               </h1>
               <p className="text-lg text-muted-foreground max-w-xl mb-8">
                 Sepatu sneaker bermerek premium yang menggabungkan kenyamanan, performa, dan
@@ -80,7 +80,7 @@ const Index = () => {
               <div className="neu-surface p-8 sm:p-12 aspect-square flex items-center justify-center">
                 <img
                   src={heroShoe}
-                  alt="Sneaker premium Stride Co."
+                  alt="Sneaker premium FadzKicks"
                   width={1200}
                   height={1200}
                   className="w-full h-full object-contain drop-shadow-2xl"

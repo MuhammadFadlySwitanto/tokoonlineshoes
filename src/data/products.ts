@@ -24,7 +24,7 @@ export const products: Product[] = [
   {
     id: "stride-aero-white",
     name: "Aero Glide",
-    brand: "Stride Co.",
+    brand: "FadzKicks",
     category: "Lifestyle / Casual",
     price: 1899000,
     image: shoe1,
@@ -44,7 +44,7 @@ export const products: Product[] = [
   {
     id: "stride-velocity-black",
     name: "Velocity Pro",
-    brand: "Stride Co.",
+    brand: "FadzKicks",
     category: "Performance / Running",
     price: 2499000,
     image: shoe2,
@@ -64,7 +64,7 @@ export const products: Product[] = [
   {
     id: "stride-canvas-cream",
     name: "Canvas High",
-    brand: "Stride Co.",
+    brand: "FadzKicks",
     category: "Lifestyle / Hi-Top",
     price: 1499000,
     image: shoe3,
@@ -84,7 +84,7 @@ export const products: Product[] = [
   {
     id: "stride-trail-grey",
     name: "Trail Beast",
-    brand: "Stride Co.",
+    brand: "FadzKicks",
     category: "Outdoor / Trail",
     price: 2199000,
     image: shoe4,
