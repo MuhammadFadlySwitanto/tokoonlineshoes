@@ -71,15 +71,38 @@ const ProductDetail = () => {
     }
 
     setSubmitting(true);
-    // Simulasi pemrosesan order
-    setTimeout(() => {
-      const orderId = "STR-" + Date.now().toString(36).toUpperCase();
-      setSuccess({ orderId });
+    const orderCode = "FK-" + Date.now().toString(36).toUpperCase();
+    const validated = parsed.data;
+
+    const { error } = await supabase.from("orders").insert({
+      order_code: orderCode,
+      product_id: product.id,
+      product_name: product.name,
+      product_image: product.image,
+      size,
+      quantity: qty,
+      unit_price: product.price,
+      total_price: total,
+      full_name: validated.fullName,
+      phone: validated.phone,
+      email: validated.email,
+      address: validated.address,
+      city: validated.city,
+      postal_code: validated.postalCode,
+      notes: validated.notes ?? null,
+    });
+
+    if (error) {
       setSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-      setSize(null);
-      setQty(1);
-    }, 700);
+      toast({
+        title: "Gagal menyimpan pesanan",
+        description: error.message,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    navigate(`/pesanan-sukses/${orderCode}`);
   };
 
   return (
