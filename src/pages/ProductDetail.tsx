@@ -1,19 +1,12 @@
 import { useState } from "react";
-import { Link, useParams, Navigate } from "react-router-dom";
+import { Link, useParams, Navigate, useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, ShieldCheck, Truck, RefreshCw, Star } from "lucide-react";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { getProduct, formatRupiah } from "@/data/products";
+import { supabase } from "@/lib/supabaseClient";
 
 const orderSchema = z.object({
   fullName: z.string().trim().min(2, "Nama minimal 2 karakter").max(100),
@@ -34,18 +27,18 @@ const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const product = id ? getProduct(id) : undefined;
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const [size, setSize] = useState<number | null>(null);
   const [qty, setQty] = useState(1);
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState<{ orderId: string } | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   if (!product) return <Navigate to="/" replace />;
 
   const total = product.price * qty;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors({});
 
@@ -78,15 +71,38 @@ const ProductDetail = () => {
     }
 
     setSubmitting(true);
-    // Simulasi pemrosesan order
-    setTimeout(() => {
-      const orderId = "STR-" + Date.now().toString(36).toUpperCase();
-      setSuccess({ orderId });
+    const orderCode = "FK-" + Date.now().toString(36).toUpperCase();
+    const validated = parsed.data;
+
+    const { error } = await supabase.from("orders").insert({
+      order_code: orderCode,
+      product_id: product.id,
+      product_name: product.name,
+      product_image: product.image,
+      size,
+      quantity: qty,
+      unit_price: product.price,
+      total_price: total,
+      full_name: validated.fullName,
+      phone: validated.phone,
+      email: validated.email,
+      address: validated.address,
+      city: validated.city,
+      postal_code: validated.postalCode,
+      notes: validated.notes ?? null,
+    });
+
+    if (error) {
       setSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-      setSize(null);
-      setQty(1);
-    }, 700);
+      toast({
+        title: "Gagal menyimpan pesanan",
+        description: error.message,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    navigate(`/pesanan-sukses/${orderCode}`);
   };
 
   return (
@@ -269,37 +285,6 @@ const ProductDetail = () => {
           </div>
         </div>
       </main>
-
-      <Dialog open={!!success} onOpenChange={(open) => !open && setSuccess(null)}>
-        <DialogContent className="rounded-2xl">
-          <DialogHeader>
-            <div className="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center mb-2">
-              <Check className="w-7 h-7 text-primary-foreground" />
-            </div>
-            <DialogTitle className="text-2xl">Pesanan Berhasil Dibuat!</DialogTitle>
-            <DialogDescription className="text-base">
-              Terima kasih telah berbelanja di FadzKicks Tim kami akan segera menghubungi Anda
-              via WhatsApp untuk konfirmasi pembayaran.
-            </DialogDescription>
-          </DialogHeader>
-          {success && (
-            <div className="neu-inset p-4 my-2">
-              <div className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-1">
-                Nomor Pesanan
-              </div>
-              <div className="font-extrabold text-lg tabular-nums">{success.orderId}</div>
-            </div>
-          )}
-          <DialogFooter>
-            <Link
-              to="/"
-              className="neu-btn-primary px-6 py-3 rounded-xl font-bold inline-flex items-center justify-center w-full"
-            >
-              Kembali ke Beranda
-            </Link>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
 
       <SiteFooter />
     </div>
