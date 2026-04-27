@@ -286,37 +286,6 @@ const ProductDetail = () => {
         </div>
       </main>
 
-      <Dialog open={!!success} onOpenChange={(open) => !open && setSuccess(null)}>
-        <DialogContent className="rounded-2xl">
-          <DialogHeader>
-            <div className="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center mb-2">
-              <Check className="w-7 h-7 text-primary-foreground" />
-            </div>
-            <DialogTitle className="text-2xl">Pesanan Berhasil Dibuat!</DialogTitle>
-            <DialogDescription className="text-base">
-              Terima kasih telah berbelanja di FadzKicks Tim kami akan segera menghubungi Anda
-              via WhatsApp untuk konfirmasi pembayaran.
-            </DialogDescription>
-          </DialogHeader>
-          {success && (
-            <div className="neu-inset p-4 my-2">
-              <div className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-1">
-                Nomor Pesanan
-              </div>
-              <div className="font-extrabold text-lg tabular-nums">{success.orderId}</div>
-            </div>
-          )}
-          <DialogFooter>
-            <Link
-              to="/"
-              className="neu-btn-primary px-6 py-3 rounded-xl font-bold inline-flex items-center justify-center w-full"
-            >
-              Kembali ke Beranda
-            </Link>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
       <SiteFooter />
     </div>
   );
