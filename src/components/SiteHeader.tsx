@@ -18,7 +18,7 @@ const SiteHeader = () => {
         </Link>
 
         <nav className="hidden md:flex gap-8 text-sm font-semibold text-muted-foreground">
-          <a href="/#koleksi" className="hover:text-primary transition-colors">Koleksi</a>
+          <Link to="/koleksi" className="hover:text-primary transition-colors">Koleksi</Link>
           <a href="/#fitur" className="hover:text-primary transition-colors">Fitur</a>
           <a href="/#testimoni" className="hover:text-primary transition-colors">Testimoni</a>
         </nav>
