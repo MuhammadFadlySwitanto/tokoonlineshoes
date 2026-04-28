@@ -233,12 +233,14 @@ const Catalog = () => {
 
           {/* Layout: sidebar + grid */}
           <div className="grid lg:grid-cols-[260px_1fr] gap-8">
-            <CatalogFilters
-              value={filters}
-              onChange={updateFilters}
-              onReset={resetFilters}
-              resultCount={filtered.length}
-            />
+            <div className="hidden lg:block">
+              <CatalogFilters
+                value={filters}
+                onChange={updateFilters}
+                onReset={resetFilters}
+                resultCount={filtered.length}
+              />
+            </div>
 
             <div>
               {filtered.length === 0 ? (
