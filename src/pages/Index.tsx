@@ -52,12 +52,12 @@ const Index = () => {
                 >
                   Beli Sekarang <ArrowRight className="w-4 h-4" />
                 </Link>
-                <a
-                  href="#koleksi"
+                <Link
+                  to="/koleksi"
                   className="neu-btn inline-flex items-center gap-2 px-7 py-4 rounded-2xl font-bold text-foreground"
                 >
                   Lihat Koleksi
-                </a>
+                </Link>
               </div>
 
               <div className="grid grid-cols-3 gap-4 mt-12 max-w-md">
@@ -130,9 +130,17 @@ const Index = () => {
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {products.map((p) => (
+              {products.slice(0, 4).map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}
+            </div>
+            <div className="mt-10 flex justify-center">
+              <Link
+                to="/koleksi"
+                className="neu-btn-primary inline-flex items-center gap-2 px-7 py-4 rounded-2xl font-bold"
+              >
+                Lihat Semua Koleksi <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>
