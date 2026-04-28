@@ -4,7 +4,9 @@ import { Search, X, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ProductCard from "@/components/ProductCard";
-import CatalogFilters, {
+import {
+  CatalogFiltersSidebar,
+  CatalogFiltersDrawer,
   CatalogFilterState,
   emptyFilters,
 } from "@/components/CatalogFilters";
@@ -167,7 +169,7 @@ const Catalog = () => {
   }, [headerLabel]);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ background: "hsl(var(--catalog-bg))" }}>
       <SiteHeader />
 
       <main className="flex-1 px-4 sm:px-6 py-8 sm:py-12">
@@ -210,12 +212,14 @@ const Catalog = () => {
             </div>
 
             <div className="flex gap-3">
-              <CatalogFilters
-                value={filters}
-                onChange={updateFilters}
-                onReset={resetFilters}
-                resultCount={filtered.length}
-              />
+              <div className="lg:hidden">
+                <CatalogFiltersDrawer
+                  value={filters}
+                  onChange={updateFilters}
+                  onReset={resetFilters}
+                  resultCount={filtered.length}
+                />
+              </div>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SortKey)}
@@ -234,7 +238,7 @@ const Catalog = () => {
           {/* Layout: sidebar + grid */}
           <div className="grid lg:grid-cols-[260px_1fr] gap-8">
             <div className="hidden lg:block">
-              <CatalogFilters
+              <CatalogFiltersSidebar
                 value={filters}
                 onChange={updateFilters}
                 onReset={resetFilters}

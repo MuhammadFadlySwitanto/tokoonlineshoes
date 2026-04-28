@@ -194,29 +194,28 @@ const FilterBody = ({ value, onChange, onReset, resultCount }: Props) => {
   );
 };
 
-/** Sidebar desktop + drawer mobile */
-const CatalogFilters = (props: Props) => {
-  const [open, setOpen] = useState(false);
+/** Sidebar khusus desktop (≥ lg). Render di kolom grid sidebar. */
+export const CatalogFiltersSidebar = (props: Props) => (
+  <aside className="neu-surface p-6 self-start sticky top-24">
+    <FilterBody {...props} />
+  </aside>
+);
 
+/** Trigger + drawer khusus mobile (< lg). Tombol-only di toolbar. */
+export const CatalogFiltersDrawer = (props: Props) => {
+  const [open, setOpen] = useState(false);
   return (
     <>
-      {/* Desktop sidebar */}
-      <aside className="hidden lg:block neu-surface p-6 self-start sticky top-24">
-        <FilterBody {...props} />
-      </aside>
-
-      {/* Mobile trigger */}
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="lg:hidden neu-btn inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-foreground"
+        className="neu-btn inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-foreground"
       >
         <SlidersHorizontal className="w-4 h-4" /> Filter
       </button>
 
-      {/* Mobile drawer */}
       {open && (
-        <div className="lg:hidden fixed inset-0 z-50 flex">
+        <div className="fixed inset-0 z-50 flex">
           <div
             className="absolute inset-0 bg-foreground/40 backdrop-blur-sm"
             onClick={() => setOpen(false)}
@@ -245,4 +244,17 @@ const CatalogFilters = (props: Props) => {
   );
 };
 
+/** Default export tetap ada untuk kompatibilitas: render keduanya sesuai breakpoint */
+const CatalogFilters = (props: Props) => (
+  <>
+    <div className="hidden lg:block">
+      <CatalogFiltersSidebar {...props} />
+    </div>
+    <div className="lg:hidden">
+      <CatalogFiltersDrawer {...props} />
+    </div>
+  </>
+);
+
 export default CatalogFilters;
+
