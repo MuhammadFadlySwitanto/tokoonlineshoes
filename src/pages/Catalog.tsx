@@ -212,12 +212,14 @@ const Catalog = () => {
             </div>
 
             <div className="flex gap-3">
-              <CatalogFilters
-                value={filters}
-                onChange={updateFilters}
-                onReset={resetFilters}
-                resultCount={filtered.length}
-              />
+              <div className="lg:hidden">
+                <CatalogFiltersDrawer
+                  value={filters}
+                  onChange={updateFilters}
+                  onReset={resetFilters}
+                  resultCount={filtered.length}
+                />
+              </div>
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SortKey)}
