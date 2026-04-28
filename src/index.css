@@ -8,6 +8,9 @@
     --background: 30 40% 97%;
     --foreground: 24 20% 12%;
 
+    /* Background lembut khusus halaman katalog (#ffead6) */
+    --catalog-bg: 28 100% 92%;
+
     --card: 0 0% 100%;
     --card-foreground: 24 20% 12%;
 
