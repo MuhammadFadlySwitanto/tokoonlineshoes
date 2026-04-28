@@ -238,7 +238,7 @@ const Catalog = () => {
           {/* Layout: sidebar + grid */}
           <div className="grid lg:grid-cols-[260px_1fr] gap-8">
             <div className="hidden lg:block">
-              <CatalogFilters
+              <CatalogFiltersSidebar
                 value={filters}
                 onChange={updateFilters}
                 onReset={resetFilters}
