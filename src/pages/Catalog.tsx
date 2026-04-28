@@ -169,7 +169,7 @@ const Catalog = () => {
   }, [headerLabel]);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-catalog-bg">
       <SiteHeader />
 
       <main className="flex-1 px-4 sm:px-6 py-8 sm:py-12">
