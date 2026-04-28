@@ -52,12 +52,12 @@ const Index = () => {
                 >
                   Beli Sekarang <ArrowRight className="w-4 h-4" />
                 </Link>
-                <a
-                  href="#koleksi"
+                <Link
+                  to="/koleksi"
                   className="neu-btn inline-flex items-center gap-2 px-7 py-4 rounded-2xl font-bold text-foreground"
                 >
                   Lihat Koleksi
-                </a>
+                </Link>
               </div>
 
               <div className="grid grid-cols-3 gap-4 mt-12 max-w-md">
