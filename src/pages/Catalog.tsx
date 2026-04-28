@@ -4,7 +4,9 @@ import { Search, X, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ProductCard from "@/components/ProductCard";
-import CatalogFilters, {
+import {
+  CatalogFiltersSidebar,
+  CatalogFiltersDrawer,
   CatalogFilterState,
   emptyFilters,
 } from "@/components/CatalogFilters";
