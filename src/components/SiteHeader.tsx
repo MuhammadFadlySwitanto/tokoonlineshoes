@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ShoppingBag } from "lucide-react";
+import logo from "@/assets/shoe.png";
 
 const SiteHeader = () => {
   return (
@@ -7,7 +8,11 @@ const SiteHeader = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-xl bg-gradient-primary shadow-neu-sm flex items-center justify-center">
-            <span className="text-primary-foreground font-extrabold text-lg">S</span>
+              <img 
+                src={logo} 
+                alt="FadzKicks Logo" 
+                className="w-9 h-8 object-contain"
+              />
           </div>
           <span className="font-extrabold text-lg tracking-tight">FadzKicks</span>
         </Link>
